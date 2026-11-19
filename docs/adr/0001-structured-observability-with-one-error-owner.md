@@ -37,3 +37,10 @@ are allow-listed, redacted and bounded.
 - External sinks, retention and alerting are separate operational decisions, not covered here.
 - Observability tests must exercise the **production call-site seam**. A copied helper or test-only
   callback proves nothing. Allow-lists are tested against opaque, secret-shaped values.
+
+## Enforcement
+
+- Static: [`enforcement/require-observable-error-handling.mjs`](../../enforcement/require-observable-error-handling.mjs)
+  plus ESLint's `no-console`.
+- Runtime: [`enforcement/safe-logger.ts`](../../enforcement/safe-logger.ts), the closed logger
+  and the root-boundary helper (`logUnhandled`, `markErrorLogged`).

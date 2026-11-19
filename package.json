@@ -1,0 +1,17 @@
+{
+  "name": "software-factory",
+  "private": true,
+  "type": "module",
+  "description": "Tests for the factory's enforcement layer: the error-ownership lint rule and the closed logger.",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.3",
+    "eslint": "9.39.4",
+    "typescript": "5.9.3",
+    "vitest": "2.1.8"
+  }
+}
