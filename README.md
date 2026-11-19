@@ -39,6 +39,7 @@ ideas:
 | [`docs/factory.md`](docs/factory.md) | The pipeline contract: the stations, the gates, model policy, state tracking. |
 | [`docs/field-notes.md`](docs/field-notes.md) | Production incidents that shaped the rules, and the rule each one produced. |
 | [`docs/adr/0001-…`](docs/adr/0001-structured-observability-with-one-error-owner.md) | A worked example ADR: the error-ownership and log-privacy contract the TDD and review stations enforce. |
+| [`enforcement/`](enforcement/) | ADR 0001 as code. An ESLint rule that fails any `catch` or `.catch()` that doesn't rethrow, log through the closed logger, or give an `expected-failure:` reason, plus the closed logger itself. Both are tested against hostile, secret-shaped input. |
 | [`docs/rfcs/TEMPLATE.md`](docs/rfcs/TEMPLATE.md) | The RFC template. |
 | [`templates/factory.json`](templates/factory.json) | Per-project wiring: commands, tracker, stage labels. |
 
@@ -72,6 +73,40 @@ claude plugin install mattpocock-skills@claude-plugins-official
 ```
 
 If you don't have them installed, the factory skips the Grill station and starts at Design.
+
+## Rules the agent can't skip
+
+Agents follow a rule more reliably when CI enforces it than when a prompt asks for it. The
+factory's TDD and review stations check error ownership and log privacy. [`enforcement/`](enforcement/)
+makes the first line of that check mechanical:
+
+```js
+// eslint.config.js
+import requireObservableErrorHandling from "./enforcement/require-observable-error-handling.mjs";
+export default [{
+  plugins: { local: { rules: { "require-observable-error-handling": requireObservableErrorHandling } } },
+  rules: { "local/require-observable-error-handling": "error", "no-console": "error" },
+}];
+```
+
+```ts
+try { await sendEmail(); }
+catch { return null; }                                   // ✗ lint error: silent failure
+
+catch (error) {                                          // ✓ recovered: this site owns it
+  logger.warn({ operation: "email.send_failed", errorName: safeErrorName(error) });
+  return null;
+}
+
+catch { /* expected-failure: malformed cookie → anonymous */ return null; }  // ✓ quiet, with a reason
+```
+
+Writing the hostile-input tests for the logger turned up two real gaps in the logger I'd been
+running in production. Its error-name check let a JWT through, and its diagnostic redactor
+missed JWTs entirely. Tests that use realistic secrets catch leaks that tests using obvious
+fake secrets don't.
+
+Run the tests with `npm install && npm run check`.
 
 ## Adapting it
 
