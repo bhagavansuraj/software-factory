@@ -1,0 +1,25 @@
+{
+  "$comment": "Project wiring consumed by the factory skill. See docs/factory.md.",
+  "tracker": "github",
+  "linearTeam": "",
+  "issuePrefix": "GH",
+  "branchPrefix": "your-handle",
+  "checkCmd": "npm run check",
+  "testCmd": "npm test",
+  "buildCmd": "npm run build",
+  "deployCmd": "",
+  "prodUrl": "",
+  "rfcDir": "docs/rfcs",
+  "adrDir": "docs/adr",
+  "defaultBranch": "main",
+  "stageLabels": {
+    "design": "stage:design",
+    "designApproved": "stage:design-approved",
+    "tests": "stage:tests",
+    "testsApproved": "stage:tests-approved",
+    "coding": "stage:coding",
+    "review": "stage:review",
+    "deploy": "stage:deploy",
+    "done": "stage:done"
+  }
+}

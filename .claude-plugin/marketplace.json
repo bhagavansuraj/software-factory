@@ -1,0 +1,14 @@
+{
+  "name": "software-factory",
+  "owner": { "name": "Suraj Bhagavan", "url": "https://github.com/bhagavansuraj" },
+  "description": "The Software Factory, as an installable Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "software-factory",
+      "source": "./",
+      "description": "Approval-gated delivery pipeline: RFC design, TDD, adversarial review, resumable handoffs.",
+      "category": "engineering",
+      "keywords": ["factory", "rfc", "adr", "tdd", "code-review"]
+    }
+  ]
+}

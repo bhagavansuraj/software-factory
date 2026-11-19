@@ -1,0 +1,9 @@
+{
+  "name": "software-factory",
+  "version": "1.0.0",
+  "description": "An approval-gated delivery pipeline for Claude Code: grill → RFC → TDD → code → PR → adversarial review → deploy → verify.",
+  "author": { "name": "Suraj Bhagavan", "url": "https://github.com/bhagavansuraj" },
+  "repository": "https://github.com/bhagavansuraj/software-factory",
+  "license": "MIT",
+  "keywords": ["factory", "rfc", "adr", "tdd", "code-review", "workflow"]
+}
