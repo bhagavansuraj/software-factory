@@ -8,9 +8,8 @@ Grill → ✋ → RFC design → ✋ → TDD test plan → ✋ → Code (sandbox
      → PR + test evidence → Adversarial review → ✋ → Deploy → Verify in prod
 ```
 
-I built this to run a production SaaS product (a Cloudflare Workers + React app) where I was the
-only human engineer and Claude did most of the typing. Over several hundred PRs it became the
-part I'd most want to take to the next project. This repo is that part, without the product.
+I built this to run a production SaaS product (a Cloudflare Workers + React app) where I wanted myself and another person, who has a product background to be able to safely make contributions, while retaining ownership on the system design.Claude did most of the typing. Over several hundred PRs it became the
+part I'd most want to take to the next project. 
 
 ## Why it exists
 
@@ -19,7 +18,7 @@ ideas:
 
 - **Decide in writing before writing code.** Each issue gets an RFC. Decisions that cut across
   issues are promoted to ADRs, and the design station has to read **every** ADR before it proposes
-  anything. Six months in, the agent still knows why the system looks the way it does.
+  anything. Six months in, the agent still knows why the system looks the way it does. This is a method I have used myself with my teams, and it applies equally to agents. 
 - **Tests are the spec.** The TDD station turns the approved RFC into a categorised test plan with
   failing skeletons. A requirement with no test isn't in the plan.
 - **Assume the PR is wrong.** A separate read-only `adversarial-reviewer` agent hunts for bugs,
